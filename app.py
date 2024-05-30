@@ -10,9 +10,6 @@ model = pickle.load(open('model/final_model.pkl','rb'))
 
 app = Flask(__name__)
 
-@app.route('/')
-def home():
-    return "API de Previsão de Empréstimos"
 
 @app.route('/empresa/predict', methods=['POST'])
 def emprestimo_predict():
