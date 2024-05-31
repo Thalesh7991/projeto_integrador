@@ -122,6 +122,6 @@ class PredictEmprestimo(object):
         pred = model.predict(test_data)
         original_data['prediction'] = pred
 
-        return original_data.to_json(orient='records')
+        return original_data.to_json(orient='records', date_format='iso')
     
 
