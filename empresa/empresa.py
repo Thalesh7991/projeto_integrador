@@ -125,8 +125,7 @@ class PredictEmprestimo(object):
     def get_predictions(self, model, test_data, original_data):
         print('predict')
         pred = model.predict(test_data)
-        test_data['prediction'] = pred.values
-        print('predict3')
-        return test_data.to_json(orient='records', date_format='iso')
+        return pred
+        
     
 
