@@ -24,6 +24,7 @@ class PredictEmprestimo(object):
         self.imputer                                    = pickle.load(open('parameter/imputer_knn.pkl','rb'))
     
     def data_cleaning(self, df1):
+        print('cleaning')
         num_attributes = df1.select_dtypes(include=['int64','float64'])
         cat_attributes = df1.select_dtypes(include=['object','category'])
         if num_attributes.isnull().any().any():
@@ -34,6 +35,7 @@ class PredictEmprestimo(object):
         return df1
     
     def feature_engineering(self, df2):
+        print('feature')
         # Taxa de Juros Ajustada a renda
         df2['taxa_juros_ajustada_renda'] = df2['taxa_juros_emprestimo'] / df2['renda']
 
@@ -63,6 +65,7 @@ class PredictEmprestimo(object):
         return df2
     
     def data_preparation(self, df3):
+        print('preparation')
         df3['idade'] = self.idade.transform(df3[['idade']])
         df3['renda'] = self.renda.transform(df3[['renda']])
         df3['tempo_emprego'] = self.tempo_emprego.transform(df3[['tempo_emprego']])
@@ -119,9 +122,11 @@ class PredictEmprestimo(object):
         return df3[boruta_columns]
 
     def get_predictions(self, model, test_data, original_data):
+        print('predict')
         pred = model.predict(test_data)
+        print('predict2')
         original_data['prediction'] = pred
-
+        print('predict3')
         return original_data.to_json(orient='records', date_format='iso')
     
 
