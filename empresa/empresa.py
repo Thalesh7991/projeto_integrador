@@ -124,7 +124,7 @@ class PredictEmprestimo(object):
 
     def get_predictions(self, model, test_data, original_data):
         # Faça a previsão
-        pred = model.predict(test_data)
+        pred = model.predict(np.ravel(test_data) )
     
         return 'aaaa'
         
