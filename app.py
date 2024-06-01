@@ -26,15 +26,18 @@ def emprestimo_predict():
             test_raw = pd.DataFrame(test_json, columns=test_json[0].keys())
         
         pipeline = PredictEmprestimo()
-
+        print('INICIO CLEANING')
         df_cleaning = pipeline.data_cleaning(test_raw)
-
+        print('FIM CLEANING')
+        print('INICIO FEATURE')
         df_feature = pipeline.feature_engineering(df_cleaning)
-
+        print('FIM FEATURE')
+        print('INICIO PREPARATION')
         df_preparation = pipeline.data_preparation(df_feature)
-
+        print('FIM PREPARATION')
+        print('INICIO PREDICT')
         df_predict = pipeline.get_predictions(model, df_preparation, test_raw)
-
+        print('FIM PREDICT')
         return df_predict
     else:
         return Response('{}', status=200, mimetype='application/json')
