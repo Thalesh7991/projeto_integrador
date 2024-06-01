@@ -124,7 +124,13 @@ class PredictEmprestimo(object):
 
     def get_predictions(self, model, test_data, original_data):
         print('predict')
+        # Aplique a previsão
         pred = model.predict(test_data)
+        
+        # Verifique se 'pred' é uma matriz coluna e a transforme em uma array unidimensional, se necessário
+        if pred.ndim > 1 and pred.shape[1] == 1:
+            pred = pred.ravel()
+        
         return pred
         
     
