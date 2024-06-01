@@ -126,7 +126,7 @@ class PredictEmprestimo(object):
         # Faça a previsão
         pred = model.predict(test_data)
     
-        return pred
+        return 'aaaa'
         
     
 
