@@ -122,11 +122,10 @@ class PredictEmprestimo(object):
 
         return df3[boruta_columns]
 
-    def get_predictions(self, model, test_data, original_data):
-        # Faça a previsão
-        pred = model.predict(np.ravel(test_data) )
-    
-        return 'aaaa'
+    def get_predictions(self, model, test_data):
+        print('AAAAAAAAAAA')
+        print(type(test_data))
+        return model.predict(test_data )
         
     
 
