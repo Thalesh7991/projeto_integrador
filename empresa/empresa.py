@@ -125,7 +125,7 @@ class PredictEmprestimo(object):
     def get_predictions(self, model, test_data):
         print('AAAAAAAAAAA')
         print(type(test_data))
-        return model.predict(column_or_1d(test_data, warn=True) )
+        return model.predict(test_data)
         
     
 
