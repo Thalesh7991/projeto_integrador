@@ -123,15 +123,8 @@ class PredictEmprestimo(object):
         return df3[boruta_columns]
 
     def get_predictions(self, model, test_data, original_data):
-        if isinstance(test_data, pd.DataFrame):
-            test_data = test_data.values
-
         # Faça a previsão
-        pred = model.predict(test_data)
-        
-        # Verifique se 'pred' é uma matriz coluna e a transforme em uma array unidimensional, se necessário
-        if pred.ndim > 1 and pred.shape[1] == 1:
-            pred = pred.ravel()
+        pred = model.predict(test_data.ravel())
     
         return pred
         
