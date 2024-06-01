@@ -6,9 +6,13 @@ import pickle
 
 from empresa.empresa import PredictEmprestimo
 
-model = pickle.load(open('model/final_model.pkl','rb'))
+model = pickle.load(open('/model/final_model.pkl','rb'))
 
 app = Flask(__name__)
+
+@app.route('/')
+def index():
+    return "Hello, this is the root endpoint. Your app is running!"
 
 
 @app.route('/empresa/predict', methods=['POST'])
