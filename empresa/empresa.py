@@ -120,7 +120,8 @@ class PredictEmprestimo(object):
                             'proporcao_emprestimo_tempo_emprego',
                             'proporcao_renda_emprestimo']
 
-        return df3[boruta_columns].to_json( orient='records', date_format='iso' )
+        return df3[boruta_columns]
+        #.to_json( orient='records', date_format='iso' )
         
 
     def get_predictions(self, model, test_data):
