@@ -36,9 +36,9 @@ def emprestimo_predict():
         df_preparation = pipeline.data_preparation(df_feature)
         print('FIM PREPARATION')
         print('INICIO PREDICT')
-        df_predict = pipeline.get_predictions(model, df_preparation)
+        
         print('FIM PREDICT')
-        return df_predict
+        return df_preparation
     else:
         return Response('{}', status=200, mimetype='application/json')
 
