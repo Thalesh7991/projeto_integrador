@@ -126,6 +126,6 @@ class PredictEmprestimo(object):
 
     def get_predictions(self, model, test_data):
         print('AAAAAAAAAAA')
-        predictions = model.predict(test_data)
+        predictions = model.predict_proba(test_data)
         return predictions
 
