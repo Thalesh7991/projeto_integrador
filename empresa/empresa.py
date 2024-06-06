@@ -125,7 +125,9 @@ class PredictEmprestimo(object):
     def get_predictions(self, model, test_data):
         print('AAAAAAAAAAA')
         print(type(test_data))
-        return model.predict(test_data.values)
-        
-    
-
+        try:
+            predictions = model.predict(test_data)
+            return json.dumps(predictions.tolist())
+        except Exception as e:
+            print(f'Error during model prediction: {e}')
+            return json.dumps({'error': str(e)})
