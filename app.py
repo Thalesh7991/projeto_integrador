@@ -37,11 +37,11 @@ def emprestimo_predict():
         print('FIM PREPARATION')
         print('INICIO PREDICT')
 
-        pred = model.predict(df_preparation)
-        #df_predict = pipeline.get_predictions(model, df_preparation)
+        #pred = model.predict(df_preparation)
+        df_predict = pipeline.get_predictions(model, df_preparation)
         
         print('FIM PREDICT')
-        return 'aaa'
+        return df_predict
     else:
         return Response('{}', status=200, mimetype='application/json')
 
