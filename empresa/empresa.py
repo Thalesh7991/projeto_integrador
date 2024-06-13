@@ -24,7 +24,6 @@ class PredictEmprestimo(object):
         self.imputer                                    = pickle.load(open('parameter/imputer_knn.pkl','rb'))
     
     def data_cleaning(self, df1):
-        print('cleaning')
         num_attributes = df1.select_dtypes(include=['int64','float64'])
         cat_attributes = df1.select_dtypes(include=['object','category'])
         if num_attributes.isnull().any().any():
@@ -35,7 +34,6 @@ class PredictEmprestimo(object):
         return df1
     
     def feature_engineering(self, df2):
-        print('feature')
         # Taxa de Juros Ajustada a renda
         df2['taxa_juros_ajustada_renda'] = df2['taxa_juros_emprestimo'] / df2['renda']
 
@@ -65,7 +63,6 @@ class PredictEmprestimo(object):
         return df2
     
     def data_preparation(self, df3):
-        print('preparation')
         df3['idade'] = self.idade.transform(df3[['idade']])
         df3['renda'] = self.renda.transform(df3[['renda']])
         df3['tempo_emprego'] = self.tempo_emprego.transform(df3[['tempo_emprego']])
@@ -78,12 +75,11 @@ class PredictEmprestimo(object):
         df3['proporcao_emprestimo_tempo_emprego'] = self.proporcao_emprestimo_tempo_emprego.transform(df3[['proporcao_emprestimo_tempo_emprego']])
         df3['proporcao_emprestimo_historico_credito'] = self.proporcao_emprestimo_historico_credito.transform(df3[['proporcao_emprestimo_historico_credito']])
         df3['proporcao_renda_emprestimo'] = self.proporcao_renda_emprestimo.transform(df3[['proporcao_renda_emprestimo']])
-        print('FIM NUMÉRICAS')
         df3['grau_risco_emprestimo'] = self.grau_risco_emprestimo.transform(df3[['grau_risco_emprestimo']])
 
-        df3['posse_casa'] = self.posse_casa.transform(df3[['posse_casa']])
-        df3['finalidade_emprestimo'] = self.finalidade_emprestimo.transform(df3[['finalidade_emprestimo']])
-        df3['registro_inadimplencia'] = self.registro_inadimplencia.transform(df3[['registro_inadimplencia']])
+        df3['posse_casa'] = self.posse_casa.transform(df3['posse_casa'])
+        df3['finalidade_emprestimo'] = self.finalidade_emprestimo.transform(df3['finalidade_emprestimo'])
+        df3['registro_inadimplencia'] = self.registro_inadimplencia.transform(df3['registro_inadimplencia'])
 
 
         # categoria_renda
@@ -121,12 +117,11 @@ class PredictEmprestimo(object):
                             'proporcao_renda_emprestimo']
 
         return df3[boruta_columns]
-        #.to_json( orient='records', date_format='iso' )
-        
 
-    def get_predictions(self, model, test_data):
-        pred = model.predict( test_data )
+    def get_predictions(self, model, test_data, test_raw):
+        pred = model.predict(test_data)
         test_data['prediction'] = pred
-        
-        return test_data.to_json( orient='records', date_format='iso' )
+
+        return test_data.to_json(orient='records')
+    
 
